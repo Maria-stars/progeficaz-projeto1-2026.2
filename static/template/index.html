@@ -1,13 +1,31 @@
-<!-- DOCTYPE, HTML, HEAD DEVEM CONTINUAR AQUI -->
-<body>
-  <img src="{{{{ url_for('static', filename='img/logo-getit.png') }}}}">
-  <p>Como o Post-it, mas com outro verbo</p>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Get-it</title>
+<link rel='stylesheet' href="{{{{ url_for('static', filename='template/style.css')}}}}">
 
-  <form action="/submit" method="POST">
+</head>
+<body>
+<img src="{{{{ url_for('static', filename='img/logo-getit.png')}}}}">
+<div class="introducao">
+      <p >Como o Post-it, mas com outro verbo</p>
+</div>
+
+  <form action="/submit" method="POST" class="form-nota">
     <label for="titulo">Título</label>
     <input id="titulo" type="text" name="titulo" />
     <label for="detalhes">Detalhes</label>
     <input id="detalhes" name="detalhes" />
     <input type="submit" />
   </form>
-  <!-- O RESTO DO HTML A PARTIR DAQUI -->
+
+<div class="notas">
+    <ul class="lista-notas">
+    {notes}    
+    </ul>
+</div>
+
+
+</body>
+</html>

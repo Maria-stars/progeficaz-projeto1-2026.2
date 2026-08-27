@@ -1,53 +1,23 @@
-
-NOTE_TEMPLATE = '''  <li>
+ <li class="nota">
     <h3>{title}</h3>
     <p>{details}</p>
-  </li>
-'''
 
+    <form action="/delete" method="POST"  style="display:inline;">
+      <input type="hidden" name="note_id" value='{id}'>
+      <button class='bot_excluir' type="submit" name="delete_button">Excluir</button>
+    </form>
 
-RESPONSE_TEMPLATE = '''<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Get-it</title>
-</head>
-<body>
-
-<img src="{{{{ url_for('static', filename='img/logo-getit.png') }}}}">
-<p>Como o Post-it, mas com outro verbo</p>
-
-<ul>
-  <li>
-    <h3>Receita de miojo</h3>
-    <p>Bata com um martelo antes de abrir o pacote. Misture o tempero, coloque em uma vasilha e aproveite seu snack :)</p>
+    <form action='/edicao/{id}' method="GET" style="display:inline;">
+      <input type="hidden" name='nome_de_edicao'  value="{id}">
+      <button class="bot_editar" type="submit" name='edit_button'>
+        Editar
+      </button>
+    </form>   
+    
+    <form action='/favorite/{id}' method="POST" style="display:inline;">
+      <input type="hidden" name='current_favorite'  value="{favorite_value}">
+      <button class='bot_favorito' class="card" type="submit" name='favorite_button'>
+        {favorite}
+      </button>
+    </form>   
   </li>
-  <li>
-    <h3>Pão doce</h3>
-    <p>Abra o pão e coloque o seu suco em pó favorito.</p>
-  </li>
-  <li>
-    <h3>Sorvete com cristais de leite</h3>
-    <p>Sirva o seu sorvete favorito em uma vasilha e jogue leite em cima.</p>
-  </li>
-  <li>
-    <h3>Iogurte natural</h3>
-    <p>Deixe o leite fora da geladeira (esse é mentira, não faça isso).</p>
-  </li>
-  <li>
-    <h3>Homer Simpson</h3>
-    <p>~( 8(|)</p>
-  </li>
-  <li>
-    <h3>Numero mágico</h3>
-    <p>142857</p>
-  </li>
-  <li>
-    <h3>Série da Fundação - Isaac Asimov</h3>
-    <p>É boa, leia.</p>
-  </li>
-</ul>
-
-</body>
-</html>
-'''
