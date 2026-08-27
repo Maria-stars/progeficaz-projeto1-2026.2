@@ -24,5 +24,5 @@ def submit_form():
 if __name__ == '__main__':
     conn = sqlite3.connect("banco.db")
     cursor = conn.cursor()
-    cursor.execute("CREATE TABLE if not exists note (id INTEGER PRIMARY KEY AUTOINCREMENT, title, content, favorite integer) ")
+    cursor.execute("CREATE TABLE if not exists note (id INTEGER PRIMARY KEY AUTOINCREMENT, title, content) ")
     app.run(debug=True)

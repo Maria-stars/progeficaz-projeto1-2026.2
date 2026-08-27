@@ -10,5 +10,5 @@ def index():
 
     return load_template('index.html').format(notes=notes)
 
-def submit(titulo, detalhes, favorite):
-    nova_nota(titulo, detalhes, favorite)
+def submit(titulo, detalhes):
+    nova_nota(titulo, detalhes)
