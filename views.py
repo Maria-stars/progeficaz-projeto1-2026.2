@@ -1,4 +1,4 @@
-from utils import load_data, load_template
+from utils import load_data, load_template, nova_nota
 
 def index():
     note_template = load_template('components/note.html')
@@ -9,3 +9,6 @@ def index():
     notes = '\n'.join(notes_li)
 
     return load_template('index.html').format(notes=notes)
+
+def submit(titulo, detalhes, favorite):
+    nova_nota(titulo, detalhes, favorite)
