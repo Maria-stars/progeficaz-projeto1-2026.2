@@ -25,3 +25,10 @@ def nova_nota(titulo, detalhes):
     cursor.execute("INSERT INTO note (title, content) VALUES (:titulo, :detalhes)", {'titulo':titulo, 'detalhes':detalhes})
     cursor.close()
     conn.close()
+
+def delete_note(id_note):
+    conn = sqlite3.connect('banco.db')
+    cursor = conn.cursor()
+    cursor.execute('DELETE from note WHERE id =? ', {id_note,})
+    cursor.close()
+    conn.close()

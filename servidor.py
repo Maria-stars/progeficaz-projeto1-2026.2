@@ -21,6 +21,12 @@ def submit_form():
     views.submit(titulo, detalhes)
     return redirect('/')
 
+@app.route('/delete', methods=['POST'])
+def delete():
+    note_id = (request.form.get('note_id'))
+    delete_note(note_id)
+    return index()
+
 if __name__ == '__main__':
     conn = sqlite3.connect("banco.db")
     cursor = conn.cursor()
