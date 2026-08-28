@@ -1,7 +1,7 @@
 import views
 from flask import Flask, render_template_string, request, redirect, url_for
 import sqlite3
-from utils import delete_note, update_note, load_template
+from utils import delete_note, update_note, load_template, update_favorite
 
 
 app = Flask(__name__)
@@ -18,9 +18,14 @@ def index():
 def submit_form():
     titulo = request.form.get('titulo')  # Obtém o valor do campo 'titulo'
     detalhes = request.form.get('detalhes')  # Obtém o valor do campo 'detalhes'
-
-    views.submit(titulo, detalhes)
+    favorite = request.form.get('favorite', 0)  
+    if not favorite:
+        favorite = 0
+    else:
+        favorite = int(favorite)
+    views.submit(titulo, detalhes, favorite)
     return redirect('/')
+    
 
 @app.route('/delete', methods=['POST'])
 def delete():
@@ -58,8 +63,22 @@ def edicao_tela(nota_id):
     template = load_template('components/edit.html').format(titulo=note['titulo'], detalhes=note['detalhes'], id=note['id'], favorite=note['favorite'])
     return render_template_string(template)
 
+@app.route('/favorite/<int:nota_id>', methods=['POST'])
+def favorito(nota_id):
+    current_favorite = int(request.form.get('current_favorite') or 0)
+
+    new_favorite = 0 if current_favorite == 1 else 1
+
+    update_favorite(nota_id, new_favorite)
+    return redirect(url_for('index'))
+
 if __name__ == '__main__':
     conn = sqlite3.connect("banco.db")
     cursor = conn.cursor()
-    cursor.execute("CREATE TABLE if not exists note (id INTEGER PRIMARY KEY AUTOINCREMENT, title, content) ")
+    cursor.execute("""CREATE TABLE IF NOT EXISTS note (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title,
+        content,
+        favorite INTEGER NOT NULL DEFAULT 0
+    )""")
     app.run(debug=True)

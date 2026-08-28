@@ -2,19 +2,25 @@ from utils import load_data, load_template, nova_nota
 
 def index():
     note_template = load_template('components/note.html')
-    notes_li = [
-        note_template.format(
-            id=dados['id'],
-            title=dados['title'],
-            details=dados['content'],
-            favorite_value=dados['favorite'],
-            favorite='Desfavoritar' if dados['favorite'] else 'Favoritar'
-        )
-        for dados in load_data('notes.js')
-    ]
-    notes = '\n'.join(notes_li)
+    dados = load_data('banco.db')
 
+    notes_li = []
+    for nota in dados:
+        notes_li.append(
+            note_template.format(
+                id=nota['id'],
+                title=nota['title'],
+                details=nota['content'],
+                favorite='★' if nota['favorite'] == 1 else '☆',
+                favorite_value=nota['favorite']
+            )
+        )
+
+    notes = '\n'.join(notes_li)
+    html = load_template('index.html').format(notes=notes)
+    print(html)
     return load_template('index.html').format(notes=notes)
 
-def submit(titulo, detalhes):
-    nova_nota(titulo, detalhes)
+
+def submit(titulo, detalhes, favorite):
+    nova_nota(titulo, detalhes, favorite)
