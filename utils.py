@@ -38,4 +38,10 @@ def delete_note(note_id):
     cursor.close()
     conn.close()
 
+def update_note(note_id, nota_titulo, nota_detalhes):
+    conn = sqlite3.connect('banco.db')
+    cursor = conn.cursor()
+    cursor.execute( 'UPDATE note SET title = ?, content = ? WHERE id = ?', (nota_titulo, nota_detalhes, note_id))
+    conn.commit()
+    conn.close()
 
