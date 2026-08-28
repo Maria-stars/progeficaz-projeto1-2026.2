@@ -8,7 +8,8 @@ def load_data(banco):
     cursor = conn.cursor()
 
     cursor.execute("""SELECT id, title, content, COALESCE(favorite, 0) AS favorite
-                      FROM note ORDER BY favorite DESC""")
+                      FROM note
+                      ORDER BY COALESCE(favorite, 0) DESC, id ASC""")
     
     rows = cursor.fetchall()
     conn.close()

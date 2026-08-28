@@ -1,4 +1,4 @@
- <li class="nota">
+ <li class="nota card">
     <h3>{title}</h3>
     <p>{details}</p>
 
@@ -16,7 +16,7 @@
     
     <form action='/favorite/{id}' method="POST" style="display:inline;">
       <input type="hidden" name='current_favorite'  value="{favorite_value}">
-      <button class='bot_favorito' class="card" type="submit" name='favorite_button'>
+        <button class='bot_favorito' type="submit" name='favorite_button'>
         {favorite}
       </button>
     </form>   
