@@ -27,9 +27,15 @@ def nova_nota(titulo, detalhes):
     cursor.close()
     conn.close()
 
-def delete_note(id_note):
+def delete_note(note_id):
     conn = sqlite3.connect('banco.db')
     cursor = conn.cursor()
-    cursor.execute('DELETE from note WHERE id =? ', {id_note,})
+    cursor.execute(
+        'DELETE FROM note WHERE id = ?',
+        (note_id,)
+    )
+    conn.commit()
     cursor.close()
     conn.close()
+
+
