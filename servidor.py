@@ -1,6 +1,7 @@
 import views
 from flask import Flask, render_template_string, request, redirect
 import sqlite3
+from utils import delete_note
 
 
 app = Flask(__name__)

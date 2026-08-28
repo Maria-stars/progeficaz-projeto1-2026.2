@@ -1,0 +1,12 @@
+<link rel='stylesheet' href="{{{{ url_for('static', filename='style.css')}}}}">
+
+
+<form action="/edicao" method="POST" class="form-nota">
+  <input type="hidden" name="note_id" value="{id}">
+  <label>Título</label>
+  <input type="text" name="titulo" value="{titulo}">
+  <label>Detalhes</label>
+  <textarea name="detalhes">{detalhes}</textarea>
+  <button type="submit" name="save">Salvar</button>
+  <a href="/" name='edit_cancel' class="bot_cancelar">Cancelar </a>
+</form>

@@ -23,6 +23,7 @@ def nova_nota(titulo, detalhes):
     conn = sqlite3.connect('banco.db')
     cursor = conn.cursor()
     cursor.execute("INSERT INTO note (title, content) VALUES (:titulo, :detalhes)", {'titulo':titulo, 'detalhes':detalhes})
+    conn.commit()
     cursor.close()
     conn.close()
 
